@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: traefik
+  namespace: egs-fuellink
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/frontend-entry-points: http,https
+    traefik.ingress.kubernetes.io/redirect-entry-point: https
+    traefik.ingress.kubernetes.io/redirect-permanent: "true"
+spec:
+  rules:
+  - host: egs-fuellink.k3s
+    http:
+      paths:
+      - path: /keycloak
+        pathType: Prefix
+        backend:
+          service:
+            name: auth-keycloak
+            port: 
+              number: 8080
+      - path: /market-analysis
+        pathType: Prefix
+        backend:
+          service:
+            name: market-analysis
+            port: 
+              number: 5000

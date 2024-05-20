@@ -1,0 +1,9 @@
+[submodule "license_plate_recognition"]
+	path = license_plate_recognition
+	url = git@github.com:Fuel-Link/license_plate_recognition.git
+[submodule "orchestrator"]
+	path = orchestrator
+	url = git@github.com:Fuel-Link/orchestrator.git
+[submodule "gas-pump"]
+	path = gas-pump
+	url = git@github.com:Fuel-Link/gas-pump.git

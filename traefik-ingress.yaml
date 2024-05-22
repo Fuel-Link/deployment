@@ -27,3 +27,10 @@ spec:
             name: market-analysis
             port: 
               number: 5000
+      - path: /gas-pump-mqtt
+        pathType: Prefix
+        backend:
+          service:
+            name: gas-pump-mqtt5
+            port: 
+              number: 8000

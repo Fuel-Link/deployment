@@ -33,7 +33,7 @@ services:
     environment:
        TZ: Europe/London
     volumes:
-      - mongodb_data:/data/db   # Mount a volume to persist MongoDB data
+      - gas-pump-mongodb_data:/data/db   # Mount a volume to persist MongoDB data
     logging:
       options:
         max-size: 50m
@@ -48,20 +48,20 @@ services:
     networks:
       fuelink-network:
         aliases:
-          - ditto-cluster
+          - gas-pump-ditto-cluster
 
     environment:
       - TZ=Europe/London
       - BIND_HOSTNAME=0.0.0.0
       # Set additional configuration options here appending JAVA_TOOL_OPTIONS: -Dditto.policies...
       - JAVA_TOOL_OPTIONS=-XX:ActiveProcessorCount=2 -XX:+ExitOnOutOfMemoryError -XX:+UseContainerSupport -XX:+UseStringDeduplication -Xss512k -XX:MaxRAMPercentage=50 -XX:+UseG1GC -XX:MaxGCPauseMillis=150 -Dpekko.coordinated-shutdown.exit-jvm=on -Dpekko.cluster.shutdown-after-unsuccessful-join-seed-nodes=180s -Dpekko.cluster.failure-detector.threshold=15.0 -Dpekko.cluster.failure-detector.expected-response-after=10s -Dpekko.cluster.failure-detector.acceptable-heartbeat-pause=20s -Dpekko.cluster.downing-provider-class=
-      - MONGO_DB_HOSTNAME=mongodb
+      - MONGO_DB_HOSTNAME=gas-pump_mongodb
       # in order to write logs into a file you can enable this by setting the following env variable
       # the log file(s) can be found in /var/log/ditto directory on the host machine
       # - DITTO_LOGGING_FILE_APPENDER=true
     # only needed if DITTO_LOGGING_FILE_APPENDER is set
     # volumes:
-    #  - ditto_log_files:/var/log/ditto
+    #  - gas-pump-ditto_log_files:/var/log/ditto
     healthcheck:
       test: curl --fail `hostname`:7626/alive || exit 1
       interval: 30s
@@ -82,21 +82,21 @@ services:
     networks:
       fuelink-network:
         aliases:
-          - ditto-cluster
+          - gas-pump-ditto-cluster
     depends_on:
-      - policies
+      - gas-pump_policies
     environment:
       - TZ=Europe/London
       - BIND_HOSTNAME=0.0.0.0
       # Set additional configuration options here appending JAVA_TOOL_OPTIONS: -Dditto.things...
       - JAVA_TOOL_OPTIONS=-XX:ActiveProcessorCount=2 -XX:+ExitOnOutOfMemoryError -XX:+UseContainerSupport -XX:+UseStringDeduplication -Xss512k -XX:MaxRAMPercentage=50 -XX:+UseG1GC -XX:MaxGCPauseMillis=150 -Dpekko.coordinated-shutdown.exit-jvm=on -Dpekko.cluster.shutdown-after-unsuccessful-join-seed-nodes=180s -Dpekko.cluster.failure-detector.threshold=15.0 -Dpekko.cluster.failure-detector.expected-response-after=10s -Dpekko.cluster.failure-detector.acceptable-heartbeat-pause=20s -Dpekko.cluster.downing-provider-class=
-      - MONGO_DB_HOSTNAME=mongodb
+      - MONGO_DB_HOSTNAME=gas-pump_mongodb
       # in order to write logs into a file you can enable this by setting the following env variable
       # the log file(s) can be found in /var/log/ditto directory on the host machine
       # - DITTO_LOGGING_FILE_APPENDER=true
     # only needed if DITTO_LOGGING_FILE_APPENDER is set
     # volumes:
-    #  - ditto_log_files:/var/log/ditto
+    #  - gas-pump-ditto_log_files:/var/log/ditto
     healthcheck:
       test: curl --fail `hostname`:7626/alive || exit 1
       interval: 30s
@@ -117,21 +117,21 @@ services:
     networks:
       fuelink-network:
         aliases:
-          - ditto-cluster
+          - gas-pump-ditto-cluster
     depends_on:
-      - policies
+      - gas-pump_policies
     environment:
       - TZ=Europe/London
       - BIND_HOSTNAME=0.0.0.0
       # Set additional configuration options here appending JAVA_TOOL_OPTIONS: -Dditto.search...
       - JAVA_TOOL_OPTIONS=-XX:ActiveProcessorCount=2 -XX:+ExitOnOutOfMemoryError -XX:+UseContainerSupport -XX:+UseStringDeduplication -Xss512k -XX:MaxRAMPercentage=50 -XX:+UseG1GC -XX:MaxGCPauseMillis=150 -Dpekko.coordinated-shutdown.exit-jvm=on -Dpekko.cluster.shutdown-after-unsuccessful-join-seed-nodes=180s -Dpekko.cluster.failure-detector.threshold=15.0 -Dpekko.cluster.failure-detector.expected-response-after=10s -Dpekko.cluster.failure-detector.acceptable-heartbeat-pause=20s -Dpekko.cluster.downing-provider-class=
-      - MONGO_DB_HOSTNAME=mongodb
+      - MONGO_DB_HOSTNAME=gas-pump_mongodb
       # in order to write logs into a file you can enable this by setting the following env variable
       # the log file(s) can be found in /var/log/ditto directory on the host machine
       # - DITTO_LOGGING_FILE_APPENDER=true
     # only needed if DITTO_LOGGING_FILE_APPENDER is set
     # volumes:
-    #  - ditto_log_files:/var/log/ditto
+    #  - gas-pump-ditto_log_files:/var/log/ditto
     healthcheck:
       test: curl --fail `hostname`:7626/alive || exit 1
       interval: 30s
@@ -152,22 +152,22 @@ services:
     networks:
       fuelink-network:
         aliases:
-          - ditto-cluster
+          - gas-pump-ditto-cluster
     depends_on:
-      - policies
+      - gas-pump_policies
     environment:
       - TZ=Europe/London
       - BIND_HOSTNAME=0.0.0.0
       # if connections to rabbitmq broker are used, you might want to disable ExitOnOutOfMemoryError, because the amqp-client has a bug throwing OOM exceptions and causing a restart loop
       # Set additional configuration options here appending JAVA_TOOL_OPTIONS: -Dditto.connectivity...
       - JAVA_TOOL_OPTIONS=-XX:ActiveProcessorCount=2 -XX:+ExitOnOutOfMemoryError -XX:+UseContainerSupport -XX:+UseStringDeduplication -Xss512k -XX:MaxRAMPercentage=50 -XX:+UseG1GC -XX:MaxGCPauseMillis=150 -Dpekko.coordinated-shutdown.exit-jvm=on -Dpekko.cluster.shutdown-after-unsuccessful-join-seed-nodes=180s -Dpekko.cluster.failure-detector.threshold=15.0 -Dpekko.cluster.failure-detector.expected-response-after=10s -Dpekko.cluster.failure-detector.acceptable-heartbeat-pause=20s -Dpekko.cluster.downing-provider-class=
-      - MONGO_DB_HOSTNAME=mongodb
+      - MONGO_DB_HOSTNAME=gas-pump_mongodb
       # in order to write logs into a file you can enable this by setting the following env variable
       # the log file(s) can be found in /var/log/ditto directory on the host machine
       # - DITTO_LOGGING_FILE_APPENDER=true
     # only needed if DITTO_LOGGING_FILE_APPENDER is set
     #volumes:
-    #  - ditto_log_files:/var/log/ditto
+    #  - gas-pump-ditto_log_files:/var/log/ditto
     healthcheck:
       test: curl --fail `hostname`:7626/alive || exit 1
       interval: 30s
@@ -188,9 +188,9 @@ services:
     networks:
       fuelink-network:
         aliases:
-          - ditto-cluster
+          - gas-pump-ditto-cluster
     depends_on:
-      - policies
+      - gas-pump_policies
     ports:
       - "8081:8080"
     environment:
@@ -206,7 +206,7 @@ services:
       #- DEVOPS_PASSWORD=foobar
     # only needed if DITTO_LOGGING_FILE_APPENDER is set
     #volumes:
-      #- ditto_log_files:/var/log/ditto
+      #- gas-pump-ditto_log_files:/var/log/ditto
     healthcheck:
       test: curl --fail `hostname`:7626/alive || exit 1
       interval: 30s
@@ -240,9 +240,9 @@ services:
     environment:
       - QUERY_CONFIG_ENABLED=true
     volumes:
-       - ../../documentation/src/main/resources/openapi:/usr/share/nginx/html/openapi:ro
-       - ../../documentation/src/main/resources/images:/usr/share/nginx/html/images:ro
-       - ./swagger3-index.html:/usr/share/nginx/html/index.html:ro
+       #- ../../documentation/src/main/resources/openapi:/usr/share/nginx/html/openapi:ro
+       #- ../../documentation/src/main/resources/images:/usr/share/nginx/html/images:ro
+       - ./gas-pump/ditto/docker/swagger3-index.html:/usr/share/nginx/html/index.html:ro
     command: nginx -g 'daemon off;'  
     logging:
       options:
@@ -258,18 +258,18 @@ services:
           memory: 32m
     restart: always
     volumes:
-       - ./nginx.conf:/etc/nginx/nginx.conf:ro
-       - ./nginx.htpasswd:/etc/nginx/nginx.htpasswd:ro
-       - ./nginx-cors.conf:/etc/nginx/nginx-cors.conf:ro
-       - ./mime.types:/etc/nginx/mime.types:ro
-       - ./index.html:/etc/nginx/html/index.html:ro
-       - ../../documentation/src/main/resources/images:/etc/nginx/html/images:ro
-       - ../../documentation/src/main/resources/wot:/etc/nginx/html/wot:ro
+       - ./gas-pump/ditto/docker/nginx.conf:/etc/nginx/nginx.conf:ro
+       - ./gas-pump/ditto/docker/nginx.htpasswd:/etc/nginx/nginx.htpasswd:ro
+       - ./gas-pump/ditto/docker/nginx-cors.conf:/etc/nginx/nginx-cors.conf:ro
+       - ./gas-pump/ditto/docker/mime.types:/etc/nginx/mime.types:ro
+       - ./gas-pump/ditto/docker/index.html:/etc/nginx/html/index.html:ro
+       #- ../../documentation/src/main/resources/images:/etc/nginx/html/images:ro
+       #- ../../documentation/src/main/resources/wot:/etc/nginx/html/wot:ro
     ports:
       - "${DITTO_EXTERNAL_PORT:-8080}:80"
     depends_on:
-      - gateway
-      - swagger-ui
+      - gas-pump_gateway
+      - gas-pump_swagger-ui
     logging:
       options:
         max-size: 10m
@@ -282,25 +282,30 @@ services:
     ports:
       - "8000:1883" #default mqtt port
     volumes:
-      - ./config:/mosquitto/config:rw
-      - ./data:/mosquitto/data:rw
-      - ./log:/mosquitto/log:rw
+      - ./gas-pump/mqtt5/config:/mosquitto/config:rw
+      - ./gas-pump/mqtt5/data:/mosquitto/data:rw
+      - ./gas-pump/mqtt5/log:/mosquitto/log:rw
     restart: unless-stopped
     networks:
       - fuelink-network # Attention that this needs to be exposed outisde
 
+  #####################################################################
+  ##       Gas Pump Eclipse Ditto and MQTT Docker Compose file       ##
+  #####################################################################
+  
+
 volumes:
-  ditto_log_files:
-    driver: local
+  gas-pump-ditto_log_files:
+    driver: local  # Specify the driver type as local
     driver_opts:
       #type: none
-      device: ./storage/ditto/log
+      device: ./gas-pump/ditto/docker/storage/ditto/log
       o: bind,uid=1000,gid=1000
   
-  mongodb_data:   # Define a volume for MongoDB data backup
-    driver: local
+  gas-pump-mongodb_data:   # Define a volume for MongoDB data backup
+    driver: local  # Specify the driver type as local
     driver_opts:
-      device: ./storage/mongodb
+      device: ./gas-pump/ditto/docker/storage/gas-pump_mongodb
       o: bind,uid=1000,gid=1000
 
 networks:

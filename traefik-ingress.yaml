@@ -27,3 +27,10 @@ spec:
             name: market-analysis
             port: 
               number: 5000
+      - path: /influxdb
+        pathType: Prefix
+        backend:
+          service:
+            name: influxdb
+            port: 
+              number: 8086

@@ -34,3 +34,10 @@ spec:
             name: gas-pump-mqtt5
             port: 
               number: 8000
+      - path: /influxdb
+        pathType: Prefix
+        backend:
+          service:
+            name: influxdb
+            port: 
+              number: 8086

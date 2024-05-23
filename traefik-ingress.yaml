@@ -13,31 +13,10 @@ spec:
   - host: egs-fuellink.k3s
     http:
       paths:
-      - path: /keycloak
+      - path: /
         pathType: Prefix
         backend:
           service:
-            name: auth-keycloak
+            name: nginx
             port: 
-              number: 8080
-      - path: /market-analysis
-        pathType: Prefix
-        backend:
-          service:
-            name: market-analysis
-            port: 
-              number: 5000
-      - path: /gas-pump-mqtt
-        pathType: Prefix
-        backend:
-          service:
-            name: gas-pump-mqtt5
-            port: 
-              number: 8000
-      - path: /influxdb
-        pathType: Prefix
-        backend:
-          service:
-            name: influxdb
-            port: 
-              number: 8086
+              number: 80

@@ -10,7 +10,7 @@ metadata:
     traefik.ingress.kubernetes.io/redirect-permanent: "true"
 spec:
   rules:
-  - host: egs-fuellink.k3s
+  - host: grupo1-egs-deti.ua.pt
     http:
       paths:
       - path: /

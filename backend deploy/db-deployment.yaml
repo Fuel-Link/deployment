@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   labels:
     io.kompose.service: db
@@ -10,6 +10,7 @@ spec:
   selector:
     matchLabels:
       io.kompose.service: db
+  serviceName: "auth-postgres"
   strategy:
     type: Recreate
   template:
@@ -31,15 +32,10 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: db-claim0
-          resources: {}
       restartPolicy: Always
-      volumes:
-        - configMap:
-            name: db-cm0
-          name: db-cm0
   volumeClaimTemplates:
   - metadata:
-      name: auth-postgres-claim0
+      name: db-claim0
     spec:
       accessModes: [ "ReadWriteOnce" ]
       resources:

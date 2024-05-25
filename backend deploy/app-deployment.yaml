@@ -21,18 +21,11 @@ spec:
       containers:
         - env:
             - name: PORT
-          image: app
+          image: registry.deti/egs-fuellink/backend
           name: nest-docker-postgres
           ports:
             - containerPort: 4200
               hostPort: 4200
               protocol: TCP
-          volumeMounts:
-            - mountPath: /app/src
-              name: app-cm0
           resources: {}
       restartPolicy: Always
-      volumes:
-        - configMap:
-            name: app-cm0
-          name: app-cm0

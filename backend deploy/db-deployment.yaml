@@ -10,9 +10,7 @@ spec:
   selector:
     matchLabels:
       io.kompose.service: db
-  serviceName: "auth-postgres"
-  strategy:
-    type: Recreate
+  serviceName: "db"
   template:
     metadata:
       labels:
@@ -23,6 +21,8 @@ spec:
         - env:
             - name: POSTGRES_PASSWORD
               value: postgres
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
           image: postgres
           name: postgres
           ports:

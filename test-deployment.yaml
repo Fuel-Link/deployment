@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test
+  namespace: egs-fuellink
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: test
+    spec:
+      containers:
+        - image: praqma/network-multitool
+          command: [ "/bin/bash", "-c", "--" ]
+          args: [ "while true; do sleep 30; done;" ]
+          imagePullPolicy: Always
+          name: test
+          resources: {}
+      restartPolicy: Always
+      dnsConfig:
+        options:
+          - name: ndots
+            value: "1"

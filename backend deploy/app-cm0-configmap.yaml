@@ -184,3 +184,4 @@ metadata:
   labels:
     io.kompose.service: app
   name: app-cm0
+  namespace: egs-fuellink

@@ -13,7 +13,7 @@ The nginx.conf file can be edited to add new services or change the path of exis
 After editing nginx.conf, run the following commands:
 
 ```
-docker build -t registry.deti/egs-fuellink/nginx:v1 -f Dockerfile.nginx .
+docker build . -f Dockerfile.nginx -t registry.deti/egs-fuellink/nginx:v1
 docker push registry.deti/egs-fuellink/nginx:v1
 kubectl rollout restart deploy nginx -n egs-fuellink
 ```

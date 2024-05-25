@@ -2,8 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    io.kompose.service: app
-  name: app
+    io.kompose.service: composer-angular
+  name: composer-angular
   namespace: egs-fuellink
 spec:
   ports:
@@ -11,4 +11,4 @@ spec:
       port: 4200
       targetPort: 4200
   selector:
-    io.kompose.service: app
+    io.kompose.service: composer-angular

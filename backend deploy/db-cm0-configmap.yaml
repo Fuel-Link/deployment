@@ -1037,3 +1037,4 @@ metadata:
   labels:
     io.kompose.service: db
   name: db-cm0
+  namespace: egs-fuellink

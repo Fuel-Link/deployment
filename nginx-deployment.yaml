@@ -14,11 +14,20 @@ spec:
       labels:
         app: nginx
     spec:
+      volumes:
+        - name: nginx-conf
+          configMap:
+            name: nginx-conf
+            defaultMode: 420
       containers:
-        - image: registry.deti/egs-fuellink/nginx:v1
+        - image: nginx
           imagePullPolicy: Always
           name: nginx
           ports:
             - containerPort: 80
+          volumeMounts:
+            - name: nginx-conf
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
           resources: {}
       restartPolicy: Always

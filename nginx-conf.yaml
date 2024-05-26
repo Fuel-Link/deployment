@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-conf
+  namespace: egs-fuellink
+data:
+  nginx.conf: |
+    user  nginx;
+    worker_processes  1;
+
+    error_log  /var/log/nginx/error.log warn;
+    pid        /var/run/nginx.pid;
+
+    events {
+      worker_connections  1024;
+    }
+
+    http {
+      include       /etc/nginx/mime.types;
+      default_type  application/octet-stream;
+
+      sendfile        on;
+
+      server {
+            listen 80 default_server;
+          server_name localhost;
+
+            location / {
+                proxy_pass http://composer-angular:4200/;
+            }
+            location /keycloak {
+                proxy_pass http://auth-keycloak:8080/keycloak/;
+            }
+            location /market-analysis {
+                proxy_pass http://market-analysis:5000/;
+            }
+            location /influxdb {
+                proxy_pass http://influxdb:8086/;
+            }
+            location /kafka {
+                proxy_pass http://kafka:8000/;
+            }
+            location /backend/ {
+                proxy_pass http://app:4200/;
+            }
+            location /gas-pump-mqtt {
+                proxy_pass http://gas-pump-mqtt5-ws:8000/;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection "upgrade";
+            }
+        }
+    }

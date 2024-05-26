@@ -8,14 +8,6 @@ The services are accessed by adding the path to the URL above. As an example, th
 
 ```egs-fuellink.k3s/keycloak```
 
-The nginx.conf file can be edited to add new services or change the path of existing services.
+The nginx-conf.yaml file can be edited to add new services or change the path of existing services.
 
-After editing nginx.conf, run the following commands:
-
-```
-docker build . -f Dockerfile.nginx -t registry.deti/egs-fuellink/nginx:v1
-docker push registry.deti/egs-fuellink/nginx:v1
-kubectl rollout restart deploy nginx -n egs-fuellink
-```
-
-The new image will be built, pushed to the registry, and nginx will be restarted.
+After editing nginx-conf.yaml, run redeploy.sh script.

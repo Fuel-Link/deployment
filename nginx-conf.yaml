@@ -43,6 +43,9 @@ data:
             location /backend/ {
                 proxy_pass http://app:4200/;
             }
+            location /licensePlateAPI/ {
+                proxy_pass http://bridge-server:8000/;
+            }
             location /gas-pump-mqtt {
                 proxy_pass http://gas-pump-mqtt5-ws:8000/;
                 proxy_http_version 1.1;

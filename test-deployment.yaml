@@ -22,7 +22,3 @@ spec:
           name: test
           resources: {}
       restartPolicy: Always
-      dnsConfig:
-        options:
-          - name: ndots
-            value: "1"

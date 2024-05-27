@@ -21,7 +21,6 @@ spec:
             defaultMode: 420
       containers:
         - image: nginx
-          imagePullPolicy: Always
           name: nginx
           ports:
             - containerPort: 80

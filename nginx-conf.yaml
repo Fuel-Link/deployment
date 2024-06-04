@@ -12,16 +12,16 @@ data:
     pid        /var/run/nginx.pid;
 
     events {
-      worker_connections  1024;
+    worker_connections  1024;
     }
 
     http {
-      include       /etc/nginx/mime.types;
-      default_type  application/octet-stream;
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
 
-      sendfile        on;
+    sendfile        on;
 
-      server {
+    server {
             listen 80 default_server;
             server_name localhost;
 
@@ -36,6 +36,9 @@ data:
             }
             location /market-analysis {
                 proxy_pass http://market-analysis:5000/;
+            }
+            location /stock {
+                proxy_pass http://stock:5000/;
             }
             location /influxdb/ {
                 proxy_pass http://influxdb:8086/;
@@ -64,3 +67,4 @@ data:
             }
         }
     }
+

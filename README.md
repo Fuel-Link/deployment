@@ -11,3 +11,7 @@ The services are accessed by adding the path to the URL above. As an example, th
 The nginx-conf.yaml file can be edited to add new services or change the path of existing services.
 
 After editing nginx-conf.yaml, run redeploy.sh script.
+
+# Other modules
+
+All deployed modules are present in this repository. Note that some container image files may not be present in this repository, because it's assumed that they have been built and pushed before
